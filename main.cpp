@@ -18,14 +18,17 @@ int main()
 	vector<string> item8 = { "8", "Mohamed Saleh", "2.4", "CS" };
 
 	tree.insertStudent(item3);
-	tree.insertStudent(item);
 	tree.insertStudent(item2);
-	tree.insertStudent(item4);
-	tree.insertStudent(item5);
-	tree.insertStudent(item6);
+	tree.insertStudent(item);
 	tree.insertStudent(item7);
+	tree.insertStudent(item4);
+	tree.insertStudent(item6);
+	tree.insertStudent(item5);
 	tree.insertStudent(item8);
 
+	tree.deleteStudent(7);
+	tree.deleteStudent(2);
+	tree.deleteStudent(5);
 	tree.inorderTraversal();
 
 }

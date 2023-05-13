@@ -49,7 +49,7 @@ class BST : public BinaryTree
 public:
     void search(int id);
     void insertStudent(vector<string> item);
-    void deleteItem(string id);
+    void deleteStudent(int id);
 
 private:
     void deleteNode(binaryTreeNode*& p);
@@ -59,12 +59,15 @@ private:
 // Binary Search Tree
 void BST::search(int id)
 {
+    binaryTreeNode* current;
     bool found = false;
+
     if (root == NULL)
         cerr << "can't search an empty tree" << endl;
     
-    binaryTreeNode* current = root;
     
+    
+    current = root;
     while (current != NULL && !found)
     {
         int currentID = stoi(current->info[0]);
@@ -74,11 +77,11 @@ void BST::search(int id)
         }
         else if (currentID < id)
         {
-            current = current->lnode;
+            current = current->rnode;
         }
         else
         {
-            current = current->rnode;
+            current = current->lnode;
         }
 
     }
@@ -153,6 +156,7 @@ void BST::deleteNode(binaryTreeNode*& p)
 
     if (p == NULL)
         cout << "can't delete a null node" << endl;
+
     else if (p->lnode == NULL && p->rnode == NULL)
     {
         temp = p;
@@ -162,13 +166,13 @@ void BST::deleteNode(binaryTreeNode*& p)
     else if (p->rnode == NULL)
     {
         temp = p;
-        p = p->lnode;
+        p = temp->lnode;
         delete temp;
     }
-    else if (p->lnode = NULL)
+    else if (p->lnode == NULL)
     {
         temp = p;
-        p = p->rnode;
+        p = temp->rnode;
         delete temp;
     }
     else
@@ -183,6 +187,7 @@ void BST::deleteNode(binaryTreeNode*& p)
         }
 
         p->info = current->info;
+
         if (trailCurrent == NULL)
             p->lnode = current->lnode;
         else
@@ -193,7 +198,7 @@ void BST::deleteNode(binaryTreeNode*& p)
 }
 
 
-void BST::deleteItem(string id)
+void BST::deleteStudent(int id)
 {
     binaryTreeNode* current;
     binaryTreeNode* trailCurrent;
@@ -209,7 +214,8 @@ void BST::deleteItem(string id)
         while (current != NULL && !found)
         {
             int current_id = stoi(current->info[0]);
-            if (current_id == stoi(id))
+
+            if (current_id == id)
             {
                 found = true;
             }
@@ -217,24 +223,29 @@ void BST::deleteItem(string id)
             {
                 trailCurrent = current;
                 
-                if (current_id < stoi(id))
+                if (current_id > id)
                 {
-                    current = current->rnode;
+                    current = current->lnode;
                 }
                 else
-                    current = current->lnode;
+                    current = current->rnode;
             }
         }
         if (current == NULL)
             cout << "Student not found!" << endl;
         else if (found)
         {
+            cout << "Student is Found!" << endl;
+            printNode(current);
+
             if (current == root)
                 deleteNode(root);
-            else if (stoi(trailCurrent->info[0]) < stoi(id))
+            else if (stoi(trailCurrent->info[0]) < id)
                 deleteNode(trailCurrent->rnode);
             else
                 deleteNode(trailCurrent->lnode);
+
+            cout << "Student is deleted.\n";
         }
     }
 }
