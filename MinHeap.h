@@ -13,10 +13,10 @@ void min_heapify(vector<vector<string>>& students, int i, int n) {
     int left = 2 * i + 1;
     int right = 2 * i + 2;
 
-    if (left < n && stoi(students[left][0]) < stoi(students[smallest][0])) {
+    if (left < n && stod(students[left][2]) < stod(students[smallest][2])) {
         smallest = left;
     }
-    if (right < n && stoi(students[right][0]) < stoi(students[smallest][0])) {
+    if (right < n && stod(students[right][2]) < stod(students[smallest][2])) {
         smallest = right;
     }
 
@@ -52,8 +52,22 @@ void min_heap_sort(vector<vector<string>>& students) {
     reverse(students.begin(), students.end());
 }
 
-
 void add_student_minH(vector<vector<string>>& students, vector<string> student) {
     students.push_back(student);
     min_heapify(students, students.size() - 1, students.size());
+}
+
+void print_all_minH(vector<vector<string>>& students) {
+    min_heap_sort(students);
+
+    for (int i = students.size() - 1; i >= 0; --i) {
+        cout << "[";
+        for (int j = 0; j < 4; j++) {
+            cout << students[i][j];
+
+            if (j != 3)
+                cout << ", ";
+        }
+        cout << "]\n";
+    }
 }
