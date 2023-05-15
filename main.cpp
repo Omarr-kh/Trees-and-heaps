@@ -3,7 +3,7 @@
 
 #include "Trees.h"
 #include "menu.h"
-#include "MinHeap.h"
+// #include "MinHeap.h"
 #include "MaxHeap.h"
 #include <fstream>
 
@@ -39,14 +39,16 @@ int main()
 		students.push_back(student);
 	}
 
-	vector<vector<string>> max_heap_students = build_max_heap(students);
+	vector<vector<string>> min_heap_students = build_max_heap(students);
+	vector<string> student = {"12", "omar", "3.5", "CS"};
+	add_student_maxH(min_heap_students, student);
 
-	//max_heap_sort(max_heap_students);
+	max_heap_sort(min_heap_students);
 
-	for (int i = 0; i < max_heap_students.size(); i++)
+	for (int i = 0; i < min_heap_students.size(); i++)
 	{
 		for (int j = 0; j < 4; j++) {
-			cout << max_heap_students[i][j] << ", ";
+			cout << min_heap_students[i][j] << ", ";
 		}
 		cout << endl;
 	}

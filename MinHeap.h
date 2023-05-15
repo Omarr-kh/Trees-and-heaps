@@ -52,3 +52,8 @@ void min_heap_sort(vector<vector<string>>& students) {
     reverse(students.begin(), students.end());
 }
 
+
+void add_student_minH(vector<vector<string>>& students, vector<string> student) {
+    students.push_back(student);
+    min_heapify(students, students.size() - 1, students.size());
+}

@@ -42,3 +42,8 @@ void max_heap_sort(vector<vector<string>>& students) {
         max_heapify(students, 0, i);
     }
 }
+
+void add_student_maxH(vector<vector<string>>& students, vector<string> student) {
+    students.push_back(student);
+    max_heapify(students, students.size() - 1, students.size());
+}
