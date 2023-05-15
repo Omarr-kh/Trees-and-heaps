@@ -3,6 +3,8 @@
 
 #include "Trees.h"
 #include "menu.h"
+#include "MinHeap.h"
+#include "MaxHeap.h"
 #include <fstream>
 
 using namespace std;
@@ -11,7 +13,44 @@ using namespace std;
 
 int main()
 {
+	vector<vector<string>> students;
+	string n;
+
+	ifstream file("students.txt");
+
+	if (!file) {
+        cout << "Error opening file." << std::endl;
+        return 1;
+    }
 	
+	getline(file, n);
+
+	for (int i = 0; i < stoi(n) + 1; i++) {
+		vector<string> student;
+		string line;
+		getline(file, line);
+		student.push_back(line);
+		getline(file, line);
+		student.push_back(line);
+		getline(file, line);
+		student.push_back(line);
+		getline(file, line);
+		student.push_back(line);
+		students.push_back(student);
+	}
+
+	vector<vector<string>> max_heap_students = build_max_heap(students);
+
+	//max_heap_sort(max_heap_students);
+
+	for (int i = 0; i < max_heap_students.size(); i++)
+	{
+		for (int j = 0; j < 4; j++) {
+			cout << max_heap_students[i][j] << ", ";
+		}
+		cout << endl;
+	}
+
 }
 
 

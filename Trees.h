@@ -376,224 +376,224 @@ void BST::deleteStudent(int id)
 }
 
 
-class AVL : public BinaryTree
-{
-private:
-    void deleteNode(binaryTreeNode *&node);
-    int balanceFactor(binaryTreeNode *node);
-    int height(binaryTreeNode *root);
-    binaryTreeNode *rotateRight(binaryTreeNode *node);
-    binaryTreeNode *rotateLeft(binaryTreeNode *node);
-    void setHeight(binaryTreeNode *node);
-    binaryTreeNode *balance(binaryTreeNode *node);
-    binaryTreeNode *balance(binaryTreeNode *node);
+// class AVL : public BinaryTree
+// {
+// private:
+//     void deleteNode(binaryTreeNode *&node);
+//     int balanceFactor(binaryTreeNode *node);
+//     int height(binaryTreeNode *root);
+//     binaryTreeNode *rotateRight(binaryTreeNode *node);
+//     binaryTreeNode *rotateLeft(binaryTreeNode *node);
+//     void setHeight(binaryTreeNode *node);
+//     binaryTreeNode *balance(binaryTreeNode *node);
+//     binaryTreeNode *balance(binaryTreeNode *node);
 
-public:
-    void search(int id);
-    void insertStudent(vector<string> data);
-    void deleteStudent(int id);
-};
+// public:
+//     void search(int id);
+//     void insertStudent(vector<string> data);
+//     void deleteStudent(int id);
+// };
 
-// ========================== Helper Functions ==========================
+// // ========================== Helper Functions ==========================
 
-// Function to calculate balance factor of node
-int AVL::balanceFactor(binaryTreeNode *node)
-{
-    if (node == nullptr)
-        return 0;
-    return height(node->lnode) - height(node->rnode);
-}
+// // Function to calculate balance factor of node
+// int AVL::balanceFactor(binaryTreeNode *node)
+// {
+//     if (node == nullptr)
+//         return 0;
+//     return height(node->lnode) - height(node->rnode);
+// }
 
-int AVL::height(binaryTreeNode *root)
-{
-    if (root == nullptr)
-        return 0;
-    int left_height = height(root->lnode);
-    int right_height = height(root->rnode);
-    return 1 + std::max(left_height, right_height);
-}
+// int AVL::height(binaryTreeNode *root)
+// {
+//     if (root == nullptr)
+//         return 0;
+//     int left_height = height(root->lnode);
+//     int right_height = height(root->rnode);
+//     return 1 + std::max(left_height, right_height);
+// }
 
-// balancing the tree
-binaryTreeNode *AVL::balance(binaryTreeNode *node)
-{
-    setHeight(node);
-    if (balanceFactor(node) == 2)
-    {
-        if (balanceFactor(node->lnode) < 0)
-            node->lnode = rotateLeft(node->lnode);
-        return rotateRight(node);
-    }
-    else if (balanceFactor(node) == -2)
-    {
-        if (balanceFactor(node->rnode) > 0)
-            node->rnode = rotateRight(node->rnode);
-        return rotateLeft(node);
-    }
-    return node;
-}
+// // balancing the tree
+// binaryTreeNode *AVL::balance(binaryTreeNode *node)
+// {
+//     setHeight(node);
+//     if (balanceFactor(node) == 2)
+//     {
+//         if (balanceFactor(node->lnode) < 0)
+//             node->lnode = rotateLeft(node->lnode);
+//         return rotateRight(node);
+//     }
+//     else if (balanceFactor(node) == -2)
+//     {
+//         if (balanceFactor(node->rnode) > 0)
+//             node->rnode = rotateRight(node->rnode);
+//         return rotateLeft(node);
+//     }
+//     return node;
+// }
 
 
-// Function to perform right rotation
-binaryTreeNode *AVL::rotateRight(binaryTreeNode *node)
-{
-    binaryTreeNode *newRoot = node->lnode;
-    node->lnode = newRoot->rnode;
-    newRoot->rnode = node;
-    return newRoot;
-}
+// // Function to perform right rotation
+// binaryTreeNode *AVL::rotateRight(binaryTreeNode *node)
+// {
+//     binaryTreeNode *newRoot = node->lnode;
+//     node->lnode = newRoot->rnode;
+//     newRoot->rnode = node;
+//     return newRoot;
+// }
 
-// Function to perform left rotation
-binaryTreeNode *AVL::rotateLeft(binaryTreeNode *node)
-{
-    binaryTreeNode *newRoot = node->rnode;
-    node->rnode = newRoot->lnode;
-    newRoot->lnode = node;
-    setHeight(node);
-    setHeight(newRoot);
-    return newRoot;
-}
+// // Function to perform left rotation
+// binaryTreeNode *AVL::rotateLeft(binaryTreeNode *node)
+// {
+//     binaryTreeNode *newRoot = node->rnode;
+//     node->rnode = newRoot->lnode;
+//     newRoot->lnode = node;
+//     setHeight(node);
+//     setHeight(newRoot);
+//     return newRoot;
+// }
 
-// ========================== Functions To Be used ==========================
-// Function to remove a student record from AVL Tree
+// // ========================== Functions To Be used ==========================
+// // Function to remove a student record from AVL Tree
 
-void AVL::deleteStudent(int id)
-{
-    binaryTreeNode *current;
-    binaryTreeNode *trailCurrent;
-    bool found = false;
+// void AVL::deleteStudent(int id)
+// {
+//     binaryTreeNode *current;
+//     binaryTreeNode *trailCurrent;
+//     bool found = false;
 
-    if (root == NULL)
-        cout << "can't delete from an empty tree" << endl;
-    else
-    {
-        current = root;
-        trailCurrent = root;
+//     if (root == NULL)
+//         cout << "can't delete from an empty tree" << endl;
+//     else
+//     {
+//         current = root;
+//         trailCurrent = root;
 
-        while (current != NULL && !found)
-        {
-            int current_id = stoi(current->info[0]);
+//         while (current != NULL && !found)
+//         {
+//             int current_id = stoi(current->info[0]);
 
-            if (current_id == id)
-            {
-                found = true;
-            }
-            else
-            {
-                trailCurrent = current;
+//             if (current_id == id)
+//             {
+//                 found = true;
+//             }
+//             else
+//             {
+//                 trailCurrent = current;
 
-                if (current_id > id)
-                {
-                    current = current->lnode;
-                }
-                else
-                    current = current->rnode;
-            }
-        }
-        if (current == NULL)
-            cout << "Student not found!" << endl;
-        else if (found)
-        {
-            cout << "Student is Found!" << endl;
-            printNode(current);
+//                 if (current_id > id)
+//                 {
+//                     current = current->lnode;
+//                 }
+//                 else
+//                     current = current->rnode;
+//             }
+//         }
+//         if (current == NULL)
+//             cout << "Student not found!" << endl;
+//         else if (found)
+//         {
+//             cout << "Student is Found!" << endl;
+//             printNode(current);
 
-            if (current == root)
-                deleteNode(root);
-            else if (stoi(trailCurrent->info[0]) < id)
-                deleteNode(trailCurrent->rnode);
-            else
-                deleteNode(trailCurrent->lnode);
+//             if (current == root)
+//                 deleteNode(root);
+//             else if (stoi(trailCurrent->info[0]) < id)
+//                 deleteNode(trailCurrent->rnode);
+//             else
+//                 deleteNode(trailCurrent->lnode);
 
-            cout << "Student is deleted.\n";
-        }
-    }
-}
+//             cout << "Student is deleted.\n";
+//         }
+//     }
+// }
 
-void AVL::search(int id)
-{
-    binaryTreeNode *current;
-    bool found = false;
+// void AVL::search(int id)
+// {
+//     binaryTreeNode *current;
+//     bool found = false;
 
-    if (root == NULL)
-        cerr << "can't search an empty tree" << endl;
+//     if (root == NULL)
+//         cerr << "can't search an empty tree" << endl;
 
-    current = root;
-    while (current != NULL && !found)
-    {
-        int currentID = stoi(current->info[0]);
-        if (currentID == id)
-        {
-            found = true;
-            break;
-        }
-        else if (currentID < id)
-        {
-            current = current->rnode;
-        }
-        else
-        {
-            current = current->lnode;
-        }
-    }
-    if (found)
-    {
-        cout << "Student is found." << endl;
-        printNode(current);
-    }
-    else
-    {
-        cout << "Student not found!" << endl;
-    }
-}
+//     current = root;
+//     while (current != NULL && !found)
+//     {
+//         int currentID = stoi(current->info[0]);
+//         if (currentID == id)
+//         {
+//             found = true;
+//             break;
+//         }
+//         else if (currentID < id)
+//         {
+//             current = current->rnode;
+//         }
+//         else
+//         {
+//             current = current->lnode;
+//         }
+//     }
+//     if (found)
+//     {
+//         cout << "Student is found." << endl;
+//         printNode(current);
+//     }
+//     else
+//     {
+//         cout << "Student not found!" << endl;
+//     }
+// }
 
-void AVL::insertStudent(vector<string> data)
-{
-    binaryTreeNode *current;
-    binaryTreeNode *trailCurrent;
-    binaryTreeNode *newNode;
+// void AVL::insertStudent(vector<string> data)
+// {
+//     binaryTreeNode *current;
+//     binaryTreeNode *trailCurrent;
+//     binaryTreeNode *newNode;
 
-    newNode = new binaryTreeNode;
-    // assert(newNode != NULL);
-    newNode->info = data;
-    newNode->lnode = NULL;
-    newNode->rnode = NULL;
+//     newNode = new binaryTreeNode;
+//     // assert(newNode != NULL);
+//     newNode->info = data;
+//     newNode->lnode = NULL;
+//     newNode->rnode = NULL;
 
-    if (root == NULL)
-    {
-        root = newNode;
-    }
-    else
-    {
-        current = root;
+//     if (root == NULL)
+//     {
+//         root = newNode;
+//     }
+//     else
+//     {
+//         current = root;
 
-        while (current != NULL)
-        {
-            trailCurrent = current;
-            int current_id = stoi(current->info[0]);
+//         while (current != NULL)
+//         {
+//             trailCurrent = current;
+//             int current_id = stoi(current->info[0]);
 
-            if (current_id == stoi(data[0]))
-            {
-                cout << "The Student already exists!" << endl;
-                return;
-            }
-            else if (current_id < stoi(data[0]))
-            {
-                current = current->rnode;
-            }
-            else
-            {
-                current = current->lnode;
-            }
-        }
-        if (stoi(trailCurrent->info[0]) < stoi(data[0]))
-        {
-            trailCurrent->rnode = newNode;
-        }
-        else
-        {
-            trailCurrent->lnode = newNode;
-        }
-    }
+//             if (current_id == stoi(data[0]))
+//             {
+//                 cout << "The Student already exists!" << endl;
+//                 return;
+//             }
+//             else if (current_id < stoi(data[0]))
+//             {
+//                 current = current->rnode;
+//             }
+//             else
+//             {
+//                 current = current->lnode;
+//             }
+//         }
+//         if (stoi(trailCurrent->info[0]) < stoi(data[0]))
+//         {
+//             trailCurrent->rnode = newNode;
+//         }
+//         else
+//         {
+//             trailCurrent->lnode = newNode;
+//         }
+//     }
 
-    // balancing the tree after insirtion
-    root = balance(root);
-}
+//     // balancing the tree after insirtion
+//     root = balance(root);
+// }
