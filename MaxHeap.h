@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <vector>
 #include <string>
@@ -24,7 +25,7 @@ void max_heapify(vector<vector<string>>& students, int i, int n) {
     }
 }
 
-vector<vector<string>> build_max_heap(vector<vector<string>> students) {
+vector<vector<string>> build_max_heap(vector<vector<string>>& students) {
     int n = students.size();
 
     for (int i = n / 2 - 1; i >= 0; --i) {

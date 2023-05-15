@@ -9,114 +9,36 @@
 
 using namespace std;
 
-// void display_menu();
-
 int main()
 {
-	vector<vector<string>> students;
-	string n;
-
-	ifstream file("students.txt");
-
-	if (!file) {
-        cout << "Error opening file." << std::endl;
-        return 1;
+	cout << "Welcome to Student Information Control System\n";
+    while (true)
+    {
+        int choice = 0;
+        menu();
+        cin >> choice;
+        switch (choice)
+        {
+        case 1:
+            BTS();
+            break;
+        case 2:
+            //AVL_MENU();
+            break;
+        case 3:
+            minHeap();
+            break;
+        case 4:
+            maxHeap();
+            break;
+        case 5:
+            cout << "Good Bye!";
+            return 0;
+        default:
+            LineBreak();
+            cout << "Please Enter vaild number for operation\n";
+            break;
+        }
     }
-	
-	getline(file, n);
-
-	for (int i = 0; i < stoi(n); i++) {
-		vector<string> student;
-		string line;
-		getline(file, line);
-		student.push_back(line);
-		getline(file, line);
-		student.push_back(line);
-		getline(file, line);
-		student.push_back(line);
-		getline(file, line);
-		student.push_back(line);
-		students.push_back(student);
-	}
-
-	vector<vector<string>> max_heap_students = build_max_heap(students);
-
-	print_all_maxH(max_heap_students);
-
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// void display_menu() {
-// 	vector<vector<string>> students;
-// 	string n;
-
-// 	ifstream file("students.txt");
-
-// 	if (!file) {
-//         cout << "Error opening file." << std::endl;
-//         return;
-//     }
-	
-// 	getline(file, n);
-
-// 	for (int i = 0; i < stoi(n); i++) {
-// 		vector<string> student;
-// 		string line;
-// 		getline(file, line);
-// 		student.push_back(line);
-// 		getline(file, line);
-// 		student.push_back(line);
-// 		getline(file, line);
-// 		student.push_back(line);
-// 		getline(file, line);
-// 		student.push_back(line);
-// 		students.push_back(student);
-// 	}
-
-// 	int choice;
-// 	cout << "Choose Data Structure:\n";
-// 	cout << "1. BST" << endl;
-// 	cout << "2. AVL" << endl;
-// 	cout << "3. Min Heap" << endl;
-// 	cout << "4. Max Heap" << endl;
-// 	cout << "5. Exit Program" << endl;
-	
-// 	cin >> choice;
-// 	switch(choice) {
-// 		case 1:
-// 			// BST
-// 			BST tree;
-// 			for (vector<string> student: students) {
-// 				break;
-// 			}
-// 			break;
-// 		case 2:
-// 			// AVT
-// 			break;
-// 		case 3:
-// 			// min heap
-// 			break;
-// 		case 4:
-// 			// max heap
-// 			break;
-// 		case 5:
-// 			// exit
-// 			return;
-// 		default:
-// 			cout << "invalid choice\n";
-// 			break;
-// 	}
-// }

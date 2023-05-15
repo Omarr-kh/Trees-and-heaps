@@ -1,9 +1,85 @@
+#pragma once
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include "Trees.h"
+#include "MinHeap.h"
+#include "MaxHeap.h"
 
 using namespace std;
+
+vector<vector<string>> students_data() {
+	vector<vector<string>> students;
+	string n;
+
+	ifstream file("students.txt");
+
+	if (!file) {
+        cout << "Error opening file." << std::endl;
+        exit(1);
+    }
+	
+	getline(file, n);
+
+	for (int i = 0; i < stoi(n); i++) {
+		vector<string> student;
+		string line;
+		getline(file, line);
+		student.push_back(line);
+		getline(file, line);
+		student.push_back(line);
+		getline(file, line);
+		student.push_back(line);
+		getline(file, line);
+		student.push_back(line);
+		students.push_back(student);
+	}
+	return students;
+}
+
+
+void LoadData(BST &bst)
+{
+
+    fstream file;
+    cout << "Loading File...." << endl;
+    if (!file)
+    {
+        cerr << "Error laoding the file\n";
+        return;
+    }
+
+    file.open("students.txt", ios::in);
+
+    string line;
+    getline(file, line);
+    string elements = line;
+    // stoi(elements)
+    for (int i = 0; i < 3 ; i++)
+    {
+        vector<string> v;
+        string id, gpa, name, dep;
+        getline(file, id);
+        getline(file, name);
+        getline(file, gpa);
+        getline(file, dep);
+
+        v.push_back(id);
+        v.push_back(name);
+        v.push_back(gpa);
+        v.push_back(dep);
+
+        // tree insertion 
+        bst.insertStudent(v);
+        //avl.insertStudent(v);
+
+        // clearing to avoid duplicates
+        v.clear();
+    }
+
+    file.close();
+}
 
 
 void LineBreak()
@@ -22,6 +98,7 @@ int TRANSFER_ID()
 
 vector<string> ADD_STUDENT()
 {
+	cout << endl;
 	LineBreak();
 	string id, name, gpa, dep;
 	cout << "ID: ";
@@ -110,33 +187,92 @@ void BTS()
 }
 
 
-void AVL_MENU()
-{
-	AVL tree;
-	int ID;
-	vector<string> data;
-	BTS_AVL_MENU();
+// void AVL_MENU()
+// {
+// 	AVL tree;
+// 	int ID;
+// 	vector<string> data;
+// 	BTS_AVL_MENU();
+// 	int choice;
+// 	cin >> choice;
+// 	while (true)
+// 	{
+// 		switch (choice)
+// 		{
+// 		case 1:
+// 			data = ADD_STUDENT();
+// 			tree.insertStudent(data);
+// 			break;
+// 		case 2:
+// 			ID = TRANSFER_ID();
+// 			tree.deleteStudent(ID);
+// 			break;
+// 		case 3:
+// 			ID = TRANSFER_ID();
+// 			tree.search(ID);
+// 			break;
+// 		case 4:
+// 			break;
+// 		case 5:
+// 			return;
+// 		default:
+// 			LineBreak();
+// 			cout << "Please Enter vaild number for operation";
+// 			break;
+// 		}
+// 	}
+// }
+
+void minHeap() {
+	vector<vector<string>> students = students_data();
+
 	int choice;
-	cin >> choice;
+	vector<string> student;
+	
 	while (true)
 	{
+		MIN_MAX_HEAP_MENU();
+		cin >> choice;
 		switch (choice)
 		{
 		case 1:
-			data = ADD_STUDENT();
-			tree.insertStudent(data);
+			student = ADD_STUDENT();
+			add_student_minH(students, student);
 			break;
 		case 2:
-			ID = TRANSFER_ID();
-			tree.deleteStudent(ID);
+			print_all_minH(students);
 			break;
 		case 3:
-			ID = TRANSFER_ID();
-			tree.search(ID);
+			return;
+		default:
+			LineBreak();
+			cout << "Please Enter vaild number for operation";
 			break;
-		case 4:
+		}
+	}
+}
+
+
+void maxHeap() {
+	vector<vector<string>> students = students_data();
+
+	int choice;
+	vector<string> student;
+	
+	while (true)
+	{
+		MIN_MAX_HEAP_MENU();
+		cin >> choice;
+		switch (choice)
+		{
+		case 1:
+			student = ADD_STUDENT();
+			add_student_maxH(students, student);
 			break;
-		case 5:
+		case 2:
+			print_all_maxH(students);
+			break;
+		case 3:
 			return;
 		default:
 			LineBreak();
@@ -148,28 +284,3 @@ void AVL_MENU()
 
 
 
-
-
-	// BST tree;
-	// vector<string> item = {"1", "Mohamed Ali", "3.4", "CS"};
-	// vector<string> item2 = {"2", "Mona Samir", "3.2", "IT"};
-	// vector<string> item3 = {"3", "Ola Maher", "1.2", "CS"};
-	// vector<string> item4 = {"4", "Magy Madgy", "2.3", "DS"};
-	// vector<string> item5 = {"5", "Omnia Osama", "3.6", "IS"};
-	// vector<string> item6 = {"6", "Ahmed Omar", "3.9", "CS"};
-	// vector<string> item7 = {"7", "Mai Adel", "3.1", "IS"};
-	// vector<string> item8 = {"8", "Mohamed Saleh", "2.4", "CS"};
-
-	// tree.insertStudent(item3);
-	// tree.insertStudent(item2);
-	// tree.insertStudent(item);
-	// tree.insertStudent(item7);
-	// tree.insertStudent(item4);
-	// tree.insertStudent(item6);
-	// tree.insertStudent(item5);
-	// tree.insertStudent(item8);
-
-	// tree.deleteStudent(7);
-	// tree.deleteStudent(2);
-	// tree.deleteStudent(5);
-	// tree.inorderTraversal();
