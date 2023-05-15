@@ -4,7 +4,6 @@
 #include "Trees.h"
 
 using namespace std;
-  
 
 
 void LineBreak()

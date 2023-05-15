@@ -2,33 +2,90 @@
 //
 
 #include "Trees.h"
+#include "menu.h"
+#include <fstream>
 
 using namespace std;
 
+// void display_menu();
+
 int main()
 {
-	BST tree;
-	vector<string> item = { "1", "Mohamed Ali", "3.4", "CS" };
-	vector<string> item2 = { "2", "Mona Samir", "3.2", "IT" };
-	vector<string> item3 = { "3", "Ola Maher", "1.2", "CS" };
-	vector<string> item4 = { "4", "Magy Madgy", "2.3", "DS" };
-	vector<string> item5 = { "5", "Omnia Osama", "3.6", "IS" };
-	vector<string> item6 = { "6", "Ahmed Omar", "3.9", "CS" };
-	vector<string> item7 = { "7", "Mai Adel", "3.1", "IS" };
-	vector<string> item8 = { "8", "Mohamed Saleh", "2.4", "CS" };
-
-	tree.insertStudent(item3);
-	tree.insertStudent(item2);
-	tree.insertStudent(item);
-	tree.insertStudent(item7);
-	tree.insertStudent(item4);
-	tree.insertStudent(item6);
-	tree.insertStudent(item5);
-	tree.insertStudent(item8);
-
-	tree.deleteStudent(7);
-	tree.deleteStudent(2);
-	tree.deleteStudent(5);
-	tree.inorderTraversal();
-
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// void display_menu() {
+// 	vector<vector<string>> students;
+// 	string n;
+
+// 	ifstream file("students.txt");
+
+// 	if (!file) {
+//         cout << "Error opening file." << std::endl;
+//         return;
+//     }
+	
+// 	getline(file, n);
+
+// 	for (int i = 0; i < stoi(n); i++) {
+// 		vector<string> student;
+// 		string line;
+// 		getline(file, line);
+// 		student.push_back(line);
+// 		getline(file, line);
+// 		student.push_back(line);
+// 		getline(file, line);
+// 		student.push_back(line);
+// 		getline(file, line);
+// 		student.push_back(line);
+// 		students.push_back(student);
+// 	}
+
+// 	int choice;
+// 	cout << "Choose Data Structure:\n";
+// 	cout << "1. BST" << endl;
+// 	cout << "2. AVL" << endl;
+// 	cout << "3. Min Heap" << endl;
+// 	cout << "4. Max Heap" << endl;
+// 	cout << "5. Exit Program" << endl;
+	
+// 	cin >> choice;
+// 	switch(choice) {
+// 		case 1:
+// 			// BST
+// 			BST tree;
+// 			for (vector<string> student: students) {
+// 				break;
+// 			}
+// 			break;
+// 		case 2:
+// 			// AVT
+// 			break;
+// 		case 3:
+// 			// min heap
+// 			break;
+// 		case 4:
+// 			// max heap
+// 			break;
+// 		case 5:
+// 			// exit
+// 			return;
+// 		default:
+// 			cout << "invalid choice\n";
+// 			break;
+// 	}
+// }
